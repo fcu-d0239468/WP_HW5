@@ -1,31 +1,39 @@
 <!doctype>
 <html>
- <head>
-  <title>test</title>
-  <meta charset="utf-8">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script>
-   $(function(){
-    $.ajax({
-     url:"http://140.134.26.71:58080/web-prog/Hotels",
-     type:"GET",
-     dataType:"json",
-     success: function(data){
-      var items = data.Infos.Info;
-      for(var i = 0; i< items.length; i++){
-       var name = items[i].Name;
-       var imgURL = items[i].Picture1;
-       var websites = items[i].Website;
-       $("#attractions").append('<div>'+items[i].Name+'</div><div><a href="'+websites+'" target="_blank"><img src="'+imgURL+'"height="200"" width="200"></a></div>');
-       }
-   },
-   error: function(){
-   }
-  });
- });
-</script>
- </head>
- <body>
-<div id="attractions"></div>
- </body>
+	<head>
+		<title>test</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="exercise.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script>
+			$(function(){
+				$.ajax({
+					url:"http://140.134.26.71:58080/web-prog/Hotels",
+					type:"GET",
+					dataType:"json",
+					success: function(data){
+						var items = data.Infos.Info;
+						for(var i = 0; i< items.length/100; i++){
+							var name = items[i].Name;
+							var imgURL = items[i].Picture1;
+							var websites = items[i].Website;
+							var address = items[i].Add;
+							$("#Pictures").append('<div class="header-row row"><span class="cell primary">Pictures</span><span class="cell">Names</span><span class="cell">Websites</span><span class="cell">Addresses</span></div><div class="row"><input type="radio" name="expand"><span class="cell primary" data-label="Pictures"><img src="'+imgURL+'" height="150" width="250"></span><span class="cell" data-label="Names">'+items[i].Name+'</span><span class="Websites" data-label="Websites"><a href="'+websites+'"target="_blank">website</a></span><span class="cell" data-label="Addresses">'+items[i].Add+'</span></div>');
+						}
+					},
+					error: function(){
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="caption">Hotels</div>
+			<div id="table">
+				
+				
+					<div id="Pictures"></div>
+				
+			</div>
+	</body>
 </html>
